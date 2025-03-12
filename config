@@ -42,6 +42,10 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
+# brightness control
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 10%-
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -53,6 +57,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-2/launcher.sh
+
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -185,13 +190,24 @@ bindsym $mod+r mode "resize"
 bar {
                                # status_command i3status
 	position top
-        font pango:FontAwesome, hack 7
-        status_command /home/ryan/bumblebee-status/bumblebee-status \
-        -m  kernel disk memory pasink pasource datetime spotify indicator  \
-        -t iceberg-rainbow
+        font pango:FiraCode Nerd Font Mono 12
+        status_command /home/ryantz/apps/bumblebee-status/bumblebee-status \
+        -m cpu disk memory datetime brightness pasink battery  \
+        -t default
 }
-exec_always --no-startup-id feh --bg-fill '/home/ryan/Desktop/wallpapers/jpn_str.jpg'
+
+# --bg-(center, scale, tile, fill)
+exec_always --no-startup-id feh --bg-fill '/home/ryantz/Desktop/wallpapers/rain.jpg'
 
 exec_always --no-startup-id xset s off
 exec_always --no-startup-id xset -dpms
 
+# display settings
+# laptop display
+#exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --right-of DP-2
+# monitor display
+#exec --no-startup-id xrandr --output DP-2 --mode 1920x1080 --pos 0x0 --primary --output
+
+
+# laptop bg
+# exec --no-startup-id feh --bg-center /home/ryantz/Desktop/wallpapers/
